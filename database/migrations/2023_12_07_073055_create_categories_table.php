@@ -17,14 +17,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('categories')->insert([
-            ['name' => 'Work'],
-            ['name' => 'Personal'],
-            ['name' => 'Errands'],
-            ['name' => 'Study'],
-            ['name' => 'Home Projects'],
-            // Add more categories as needed
-        ]);
     }
 
     /**

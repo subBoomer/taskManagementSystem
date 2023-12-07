@@ -12,7 +12,7 @@
                 @if ($task->category)
                     (Category: {{ $task->category->name }})
                 @endif
-                <a href="{{ route('tasks.edit', $task->id) }}">Edit</a>
+                <a href="{{ route('tasks.edit', ['id' => $task->id]) }}">Edit Task</a>
                 <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                     @csrf
                     @method('DELETE')

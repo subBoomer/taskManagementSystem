@@ -44,14 +44,14 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task created successfully');
     }
 
-    public function edit(Task $task)
+    public function edit($id)
     {
         $task = Task::findOrFail($id);
         $categories = Category::all();
         return view('tasks.edit', compact('task', 'categories'));
     }
 
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
         // Validate the request data
         $validatedData = $request->validate([
@@ -59,12 +59,15 @@ class TaskController extends Controller
             // Add validation rules for other fields as needed
         ]);
 
+        // Find the task by ID
+        $task = Task::findOrFail($id);
+
         // Update the task attributes
         $task->title = $validatedData['title'];
         // Update other task attributes based on the form fields
-        
+
         // Associate the task with the selected category
-        $category = Category::find($request->category_id);
+        $category = Category::findOrFail($validatedData['category_id']);
         $task->category()->associate($category);
 
         // Save the updated task

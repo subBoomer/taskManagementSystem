@@ -49,4 +49,12 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')
                          ->with('success', 'Task deleted successfully');
     }
+
+    public function show($id)
+{
+    $task = Task::findOrFail($id);
+    $category = $task->category;
+    
+    return view('tasks.show', compact('task', 'category'));
+}
 }

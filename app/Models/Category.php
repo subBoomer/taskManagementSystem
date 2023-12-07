@@ -24,5 +24,10 @@ class Category extends Model
         Schema::dropIfExists('categories');
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
     use HasFactory;
 }

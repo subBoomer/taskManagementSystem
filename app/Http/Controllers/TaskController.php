@@ -56,6 +56,7 @@ class TaskController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id', // Validation for category_id
             // Add validation rules for other fields as needed
         ]);
 

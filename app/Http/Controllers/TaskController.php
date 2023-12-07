@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class TaskController extends Controller
 {
@@ -14,7 +15,8 @@ class TaskController extends Controller
 
     public function create()
     {
-        return view('tasks.create');
+        $categories = Category::all();
+        return view('tasks.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -29,7 +31,9 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        return view('tasks.edit', compact('task'));
+        $task = Task::findOrFail($id);
+        $categories = Category::all();
+        return view('tasks.edit', compact('task', 'categories'));
     }
 
     public function update(Request $request, Task $task)
